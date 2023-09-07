@@ -16,15 +16,19 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	slackUsername := r.URL.Query().Get("slack_name")
 	track := r.URL.Query().Get("track")
 
-	resp := fmt.Sprintf(`{
-		"slack_name": "%s",
-		"current_day": "%s",
-		"utc_time": "%s",
-		"track": "%s",
-		"github_file_url": "%s",
-		"github_repo_url": "%s",
-		"status_code": 200
-		}`, slackUsername, time.Now().Weekday(), time.Now().UTC(), track, fileUrl, repoUrl,
+	resp := fmt.Sprintf(
+		`
+{
+	"slack_name": "%s",
+	"current_day": "%s",
+	"utc_time": "%s",
+	"track": "%s",
+	"github_file_url": "%s",
+	"github_repo_url": "%s",
+	"status_code": 200
+}
+`,
+		slackUsername, time.Now().Weekday(), time.Now().UTC(), track, fileUrl, repoUrl,
 	)
 
 	w.Header().Set("Content-Type", "application/json")
