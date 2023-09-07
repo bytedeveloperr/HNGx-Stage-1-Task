@@ -13,8 +13,8 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 
 	repoUrl := "https://github.com/bytedeveloperr/HNGx-Stage-1-Task"
 	fileUrl := fmt.Sprintf("%s/blob/main/main.go", repoUrl)
-	slackUsername := "bytdeveloper"
-	track := "backend"
+	slackUsername := r.URL.Query().Get("slack_name")
+	track := r.URL.Query().Get("track")
 
 	resp := fmt.Sprintf(`{
 		"slack_name": "%s",
@@ -34,7 +34,7 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 func main() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", HandleRequest)
+	mux.HandleFunc("/api", HandleRequest)
 	err := http.ListenAndServe(":3001", mux)
 
 	if errors.Is(err, http.ErrServerClosed) {
