@@ -28,7 +28,7 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	"status_code": 200
 }
 `,
-		slackUsername, time.Now().Weekday(), time.Now().UTC(), track, fileUrl, repoUrl,
+		slackUsername, time.Now().Weekday(), time.Now().UTC().Format("2006-01-02T15:04:05Z"), track, fileUrl, repoUrl,
 	)
 
 	w.Header().Set("Content-Type", "application/json")
